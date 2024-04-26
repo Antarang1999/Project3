@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Homework #3: Global Developments - CSE 578 - Fall 2023</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="apoogali.js"></script>
+        <style>
+            svg {
+             /* width: 900px; */
+                margin:auto;
+                height: 500px;
+                background-color: white;
+                border: 2px solid black;
+                border-radius: 3px;  
+            }
+
+            .myContainer {
+                margin:auto;
+                width:1210px;
+            }
+            
+            #controls {
+                background-color: lightblue;
+                height: 130px;
+                padding: 10px;
+            }
+
+            #controls h4 {
+                margin-bottom: 10px;
+            }
+
+            #bs_div {
+                width:1000px;
+                margin:auto;
+            }
+        
+            .multiselect {
+            width: 200px;
+            position: relative;
+            }
+
+            body {
+            padding: 15px;
+            background-color: #faf7f3;
+            }
+        
+        
+            .checkbox-menu li label {
+                display: block;
+                padding: 3px 10px;
+                clear: both;
+                font-weight: normal;
+                line-height: 1.42857143;
+                color: #333;
+                white-space: nowrap;
+                margin:0;
+                transition: background-color .4s ease;
+            }
+
+            .checkbox-menu li input {
+                margin: 0px 5px;
+                top: 2px;
+                position: relative;
+            }
+
+            .checkbox-menu li.active label {
+                background-color: #cbcbff;
+                font-weight:bold;
+            }
+
+            .checkbox-menu li label:hover,
+            .checkbox-menu li label:focus {
+                background-color: #f5f5f5;
+            }
+
+            .checkbox-menu li.active label:hover,
+            .checkbox-menu li.active label:focus {
+                background-color: #b8b8ff;
+            }
+
+            .dropdown-menu {
+                left: auto !important;
+            }
+
+            .tooltip {
+                position: absolute;
+                background-color: white;
+                border: 2px solid black;
+                padding: 5px;
+                font-size:16px;
+                pointer-events: none;
+                font-size: 10px;
+            }
+            
+          
+            #box_plot{
+                position: relative;
+                width: 150px;
+                height:200px;
+            }
+
+        </style>
+    </head>
+    <body>   
+        
+        <div class="myContainer">
+            <h1 class="text-center">Homework #3: Global Developments</h1>
+            <h3 class="text-center"> Antarang - apoogali@asu.edu </h3>
+    
+        </div>  
+
+        <div id="bs_div">
+            <svg id="beeswarm_svg"></svg>
+            <svg id="box_plot"></svg>
+            <!-- <svg id="box_plot"></svg> -->
+        </div>
+        </div>
+
+      <br>
+              
+            <div id="controls">
+                <h4><strong>Control Panel</strong></h4>
+    
+                <label >X-axis:</label>
+                <select id="x-axis-dropdown">			
+                    <option value="Data Health Birth Rate">Data Health Birth Rate</option>
+                    <option value="Data Health Death Rate">Data Health Death Rate</option>
+                    <option value="Data Health Fertility Rate">Data Health Fertility Rate</option>
+                    <option value="Data Health Life Expectancy at Birth Total">Data Health Life Expectancy at Birth Total</option>
+                    <option value="Data Infrastructure Mobile Cellular Subscriptions per 100 People">Data Infrastructure Mobile Cellular Subscriptions per 100 People</option>
+                    <option value="Data Rural Development Land Area">Data Rural Development Land Area</option>
+                    <option value="Data Rural Development Rural Population">Data Rural Development Rural Population</option>
+                    <option value="Data Rural Development Surface Area">Data Rural Development Surface Area</option>
+                    <option value="Data Urban Development Population Density">Data Urban Development Population Density	</option>
+                    <option value="Data Urban Development Urban Population Percent">Data Urban Development Urban Population Percent</option>
+                    <option value="Data Urban Development Urban Population Percent Growth">Data Urban Development Urban Population Percent Growth</option>
+                </select>
+        
+            
+                <label for="size">Size:</label>
+                <select id="size">			
+                    <option value="Data Health Birth Rate">Data Health Birth Rate</option>
+                    <option value="Data Health Death Rate">Data Health Death Rate</option>
+                    <option value="Data Health Fertility Rate">Data Health Fertility Rate</option>
+                    <option value="Data Health Life Expectancy at Birth Total">Data Health Life Expectancy at Birth Total</option>
+                    <option value="Data Infrastructure Mobile Cellular Subscriptions per 100 People">Data Infrastructure Mobile Cellular Subscriptions per 100 People</option>
+                    <option value="Data Rural Development Land Area">Data Rural Development Land Area</option>
+                    <option value="Data Rural Development Rural Population">Data Rural Development Rural Population</option>
+                    <option value="Data Rural Development Surface Area">Data Rural Development Surface Area</option>
+                    <option value="Data Urban Development Population Density">Data Urban Development Population Density	</option>
+                    <option value="Data Urban Development Urban Population Percent">Data Urban Development Urban Population Percent</option>
+                    <option value="Data Urban Development Urban Population Percent Growth">Data Urban Development Urban Population Percent Growth</option>
+                </select>
+        
+<br>
+                <label for="boxplot">Boxplot Attributes:</label>
+                <select id="boxplot">			
+                    <option value="Data Health Birth Rate">Data Health Birth Rate</option>
+                    <option value="Data Health Death Rate">Data Health Death Rate</option>
+                    <option value="Data Health Fertility Rate">Data Health Fertility Rate</option>
+                    <option value="Data Health Life Expectancy at Birth Total">Data Health Life Expectancy at Birth Total</option>
+                    <option value="Data Infrastructure Mobile Cellular Subscriptions per 100 People">Data Infrastructure Mobile Cellular Subscriptions per 100 People</option>
+                    <option value="Data Rural Development Land Area">Data Rural Development Land Area</option>
+                    <option value="Data Rural Development Rural Population">Data Rural Development Rural Population</option>
+                    <option value="Data Rural Development Surface Area">Data Rural Development Surface Area</option>
+                    <option value="Data Urban Development Population Density">Data Urban Development Population Density	</option>
+                    <option value="Data Urban Development Urban Population Percent">Data Urban Development Urban Population Percent</option>
+                    <option value="Data Urban Development Urban Population Percent Growth">Data Urban Development Urban Population Percent Growth</option>
+                </select>
+        
+            
+
+                <label for="regionDropdown">Regions:</label>
+                <label>
+                <button class="btn btn-default dropdown-toggle" type="button" 
+                id="regionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  data-offset="100,0">
+                Select Region
+                </button>
+                <ul class="dropdown-menu checkbox-menu allow-focus" aria-labelledby="regionDropdown">
+        
+                
+                    <li >
+                        <label><input type="checkbox" value="East Asia & Pacific">East Asia & Pacific</label>
+                    </li>
+                    
+                    <li >
+                        <label><input type="checkbox" value="Europe & Central Asia">Europe & Central Asia</label>
+                    </li>
+                    
+                    <li >
+                        <label><input type="checkbox" value="Latin America & Caribbean">Latin America & Caribbean</label>
+                    </li>
+                    
+                    
+                    <li >
+                        <label><input type="checkbox" value="Middle East & North Africa">Middle East & North Africa</label>
+                    </li>
+                    
+                    
+                    <li >
+                        <label><input type="checkbox" value="South Asia">South Asia</label>
+                    </li>
+                    
+                    
+                    <li >
+                        <label><input type="checkbox" value="Sub-Saharan Africa">Sub-Saharan Africa</label>
+                    </li>
+                    
+                    
+                    <li >
+                        <label><input type="checkbox" value="North America">North America</label>
+                    </li>
+                    <button id="select-all">Select All</button>
+                    <button id="deselect-all">Deselect All </button>
+                </ul>
+            </label>
+          
+            <label for="year">Year:</label>
+            <input type="number" id="year" min="1980" max="2013" value="1980">
+            <p id="yearInputError" style="color: black; display: inline;"></p>   
+            
+                
+
+            <button id="play">Play</button>
+            <button id="pause" style="display: none;">Pause</button>
+
+               
+            </div>
+        
+        </div>
+    </div>
+    
+    </body>
+</html> 
